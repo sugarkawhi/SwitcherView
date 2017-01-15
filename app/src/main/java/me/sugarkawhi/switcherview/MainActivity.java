@@ -138,19 +138,19 @@ public class MainActivity extends AppCompatActivity {
      */
     private void  simulateDatas(){
         SwitcherItem item0 = new SwitcherItem("http://img.hb.aicdn.com/597f37992eabd3f9f671688c52765c339bb3e253144a4-gn46Li_sq320",
-                "苏寒的插画");
+                "苏寒的插画城市月亮");
         SwitcherItem item1 = new SwitcherItem("http://img.hb.aicdn.com/a3d5fcf377f25c2937920fe58a79c7f879cd8846a01a-1xlNIi_sq320",
-                "迷失的鹿");
+                "迷失的鹿c");
         SwitcherItem item2 = new SwitcherItem("http://img.hb.aicdn.com/673d4e19afc0a6607b359deb8c5a01b703bb222519555-DOhNkj_sq320",
-                "一个人一座城");
+                "一个人、一座城");
         SwitcherItem item3 = new SwitcherItem("http://img.hb.aicdn.com/a6b00bbdeeed21c79af74d043ba4b7505cbe11bf2225b-wsXC96_sq320",
                 "裙角生香，风凉袖轻挽");
         SwitcherItem item4 = new SwitcherItem("http://img.hb.aicdn.com/8a00d52c0a2cc4367c8ed99aa891a1a0fc597882ba26-YvNH9V_sq320",
-                "向日葵");
+                "暖暖的向日葵呀");
         SwitcherItem item5 = new SwitcherItem("http://img.hb.aicdn.com/e8502c35e3decbb3d843b51ac9fc51ff73d6e5a8cb9cb-XdlFrD_sq320",
                 "我就是爱那个无脸男");
         SwitcherItem item6 = new SwitcherItem("http://img.hb.aicdn.com/4558af4f425efb7bfd3e336bacc90af49359fbec29026-Eyvg5w_sq320",
-                "[平面]炫酷");
+                "[平面]炫酷Elec");
 
         mSparseArray.append(0,item0);
         mSparseArray.append(1,item1);
@@ -218,63 +218,25 @@ public class MainActivity extends AppCompatActivity {
 
                                @Override
                                public void onNext(List<Bitmap> bitmaps) {
-
                                    if (bitmaps == null)
                                        return;
                                    for (int i = 0; i < bitmaps.size(); i++) {
                                        final Bitmap bitmap = bitmaps.get(i);
                                        switch (i) {
                                            case 0:
-                                               if (bitmap == null) {
-                                                   mImgSwitcher1.setImageResource(R.mipmap.ic_launcher);
-                                               } else {
-                                                   mImgSwitcher1.setImageDrawable(new BitmapDrawable(getResources(),
-                                                           bitmap));
-                                               }
-                                               mTextSwitcher1.setText(mSparseArray.valueAt(random1).title);
+                                               rendingSwitcher(mImgSwitcher1,bitmap,
+                                                       mTextSwitcher1,mSparseArray.valueAt(random1).title,
+                                                       0);
                                                break;
                                            case 1:
-                                               if (bitmap == null) {
-                                                   mImgSwitcher2.setImageResource(R.mipmap.ic_launcher);
-                                               } else {
-                                                   mImgSwitcher2.postDelayed(new Runnable() {
-                                                       @Override
-                                                       public void run() {
-                                                           mImgSwitcher2.setImageDrawable(new BitmapDrawable(getResources(),
-                                                                   bitmap));
-                                                       }
-                                                   }, 100);
-                                               }
-                                               mTextSwitcher2.postDelayed(new Runnable() {
-                                                   @Override
-                                                   public void run() {
-                                                       mTextSwitcher2.setText(mSparseArray.valueAt(finalRandom2).title);
-                                                   }
-                                               }, 100);
+                                               rendingSwitcher(mImgSwitcher2,bitmap,
+                                                       mTextSwitcher2,mSparseArray.valueAt(finalRandom2).title,
+                                                       100);
                                                break;
                                            case 2:
-                                               if (bitmap == null) {
-                                                   mImgSwitcher3.postDelayed(new Runnable() {
-                                                       @Override
-                                                       public void run() {
-                                                           mImgSwitcher3.setImageResource(R.mipmap.ic_launcher);
-                                                       }
-                                                   }, 200);
-                                               } else {
-                                                   mImgSwitcher3.postDelayed(new Runnable() {
-                                                       @Override
-                                                       public void run() {
-                                                           mImgSwitcher3.setImageDrawable(new BitmapDrawable(getResources(),
-                                                                   bitmap));
-                                                       }
-                                                   }, 200);
-                                               }
-                                              mTextSwitcher3.postDelayed(new Runnable() {
-                                                   @Override
-                                                   public void run() {
-                                                       mTextSwitcher3.setText(mSparseArray.valueAt(finalRandom3).title);
-                                                   }
-                                               }, 200);
+                                               rendingSwitcher(mImgSwitcher3,bitmap,
+                                                       mTextSwitcher3,mSparseArray.valueAt(finalRandom3).title,
+                                                       200);
                                                break;
                                        }
                                    }
@@ -284,6 +246,33 @@ public class MainActivity extends AppCompatActivity {
 
                 );
         mCompositeSubscription.add(subscription);
+    }
+
+    private void rendingSwitcher(final ImageSwitcher imageSwitcher, final Bitmap bitmap ,
+                                 final TextSwitcher textSwitcher , final String text ,
+                                 int delayed){
+        if (bitmap == null) {
+            imageSwitcher.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    imageSwitcher.setImageResource(R.mipmap.ic_launcher);
+                }
+            }, delayed);
+        } else {
+            imageSwitcher.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    imageSwitcher.setImageDrawable(new BitmapDrawable(getResources(),
+                            bitmap));
+                }
+            }, delayed);
+        }
+        textSwitcher.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                textSwitcher.setText(text);
+            }
+        }, delayed);
     }
 
 

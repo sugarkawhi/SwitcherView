@@ -48,9 +48,9 @@
         android:text="@string/change_group"
         android:gravity="center"
         android:background="@drawable/abc_text_change_group"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:textColor="@android:color/black"
         android:textSize="12sp"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="25dp"/>
 
 </LinearLayout>
